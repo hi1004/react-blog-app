@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="mt-[93px]">
         <Outlet />
       </main>
       <Footer />
