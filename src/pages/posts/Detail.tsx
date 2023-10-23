@@ -1,9 +1,7 @@
-import { useParams } from 'react-router-dom';
+import PostDetail from '@/components/posts/PostDetail';
 
 const PostDetailPage = () => {
-  const params = useParams();
-
-  return <div>PostDetailPage, Params: {params?.id}</div>;
+  return <PostDetail />;
 };
 
 export default PostDetailPage;
