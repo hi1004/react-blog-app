@@ -2,7 +2,7 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const PostDetail = () => {
   return (
-    <section className="flex flex-col h-full p-5">
+    <section className="flex flex-col w-full h-full p-5 sm:max-w-[680px]">
       <div className="mt-10 mb-4 text-4xl font-bold">
         Lorem ipsum dolor sit amet.
       </div>
