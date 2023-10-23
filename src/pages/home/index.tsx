@@ -1,9 +1,11 @@
+import Carousel from '@/components/carousel/Carousel';
 import PostList from '@/components/posts/PostList';
 import PostNavigation from '@/components/posts/PostNavigation';
 
 const HomePage = () => {
   return (
-    <section>
+    <section className="relative w-full">
+      <Carousel />
       <PostNavigation />
       <PostList />
     </section>
