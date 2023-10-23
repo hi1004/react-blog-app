@@ -15,7 +15,7 @@ const Footer = () => {
           className="flex items-center gap-1"
         >
           <AiFillGithub className="text-3xl" />
-          <span className="text-sm">GitHub</span>
+          <span className="text-sm font-bold">GitHub</span>
         </Link>
       </nav>
 

@@ -1,12 +1,35 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import { Outlet } from 'react-router-dom';
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
+  const [headerHeight, setHeaderHeight] = useState<number>(93);
+  const [mainHeight, setMainHeight] = useState<string>('');
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/signup' || location.pathname === '/signout') {
+      setMainHeight(`calc(100vh - ${headerHeight + 158}px)`);
+    } else {
+      setMainHeight('90vh');
+    }
+  }, [headerHeight, location]);
+
+  const updateHeaderHeight = (newHeight: number) => {
+    setHeaderHeight(newHeight);
+  };
+
   return (
     <>
-      <Header />
-      <main className="mt-[93px]">
+      <Header getHeaderHeight={updateHeaderHeight} />
+      <main
+        style={{
+          marginTop: headerHeight,
+          minHeight: mainHeight,
+        }}
+        className={`grid place-items-center`}
+      >
         <Outlet />
       </main>
       <Footer />
