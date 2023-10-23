@@ -1,5 +1,13 @@
+import PostList from '@/components/posts/PostList';
+import Profile from '@/components/profile/Profile';
+
 const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return (
+    <>
+      <Profile />
+      <PostList />
+    </>
+  );
 };
 
 export default ProfilePage;
