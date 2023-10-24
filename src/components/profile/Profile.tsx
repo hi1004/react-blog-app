@@ -7,7 +7,7 @@ const Profile = () => {
       <div className="flex items-center justify-between max-w-[680px] pt-5">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 post__profile ">
-            <FaUserCircle className="w-full h-full text-sky-300" />
+            <FaUserCircle className="w-full h-full text-sky-600" />
           </div>
           <address className="not-italic">
             <div className="pb-1 font-medium">test@test.com</div>

@@ -1,5 +1,7 @@
+import PostForm from '@/components/posts/PostForm';
+
 const PostNewPage = () => {
-  return <div>PostNewPage</div>;
+  return <PostForm />;
 };
 
 export default PostNewPage;
