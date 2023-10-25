@@ -24,6 +24,7 @@
     "@toast-ui/react-chart": "^4.7.1",
     "@toast-ui/react-editor": "^3.2.3",
     "codemirror": "^6.0.1",
+    "firebase": "^10.5.0",
     "highlight.js": "^11.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
