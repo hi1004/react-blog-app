@@ -33,8 +33,8 @@ const Header = ({ getHeaderHeight }: HeaderProps) => {
       <nav>
         <ul className="flex gap-4">
           {[
-            { to: 'posts/new', text: '投稿' },
-            { to: 'posts', text: '投稿記事' },
+            { to: 'posts/new', text: 'ブログを書く' },
+            { to: 'posts', text: '記事一覧' },
             { to: 'profile', text: 'プロフィール' },
           ].map((link, index) => (
             <li

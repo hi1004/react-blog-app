@@ -40,6 +40,7 @@ const commonSetting = {
   slidesToShow: 1,
   slidesToScroll: 1,
   pauseOnHover: true,
+  lazyLoad: undefined,
 };
 
 export const settings1 = {

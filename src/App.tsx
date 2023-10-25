@@ -1,5 +1,6 @@
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import ScrollToTop from '@/components/scroll/ScrollToTop';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -22,13 +23,14 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Header getHeaderHeight={updateHeaderHeight} />
       <main
         style={{
           marginTop: headerHeight,
           minHeight: mainHeight,
         }}
-        className={`grid place-items-center`}
+        className={`sm:grid sm:place-items-center`}
       >
         <Outlet />
       </main>

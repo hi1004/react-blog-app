@@ -1,4 +1,5 @@
 import { FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const PostDetail = () => {
   return (
@@ -8,7 +9,7 @@ const PostDetail = () => {
       </div>
       <div className="flex items-center gap-2 pb-3 text-sm border-b post__profile-box">
         <div className="post__profile w-9 h-9 ">
-          <FaUserCircle className="w-full h-full text-sky-300" />
+          <FaUserCircle className="w-full h-full text-sky-600" />
         </div>
         <div className="text-gray-400 post__author">name</div>
         <span className="text-gray-400 ">
@@ -16,7 +17,9 @@ const PostDetail = () => {
         </span>
       </div>
       <div className="flex gap-2 py-4 text-sm text-gray-400 border-b post__utill-box">
-        <button className="pointerhover:hover:text-gray-800">修正</button>
+        <button className="pointerhover:hover:text-gray-800">
+          <Link to="/posts/1/edit">修正</Link>
+        </button>
         <button className="pointerhover:hover:text-gray-800">削除</button>
       </div>
       <p className="pt-5 text-gray-500">
