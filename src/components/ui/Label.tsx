@@ -1,7 +1,7 @@
 import { FieldErrors } from 'react-hook-form';
 
 interface LabelProps {
-  htmlFor: string;
+  htmlFor?: string;
   label: string;
   position?: boolean;
   errors: FieldErrors;
@@ -26,7 +26,7 @@ const Label = ({ htmlFor, label, position, errors }: LabelProps) => {
     peer-placeholder-shown:translate-y-0
     peer-focus:scale-75
     peer-focus:translate-y-4
-    ${errors[htmlFor] ? 'text-rose-500' : 'text-zinc-400'}
+    ${errors[htmlFor!] ? 'text-rose-500' : 'text-black'}
     `}
     >
       {label}

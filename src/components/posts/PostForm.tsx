@@ -1,7 +1,6 @@
 import TuiEditor from '@/components/posts/TuiEditor';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import Textarea from '@/components/ui/Textarea';
 import { Editor } from '@toast-ui/react-editor';
 
 import { useRef, useState } from 'react';
@@ -9,17 +8,21 @@ import { FieldValues, useForm } from 'react-hook-form';
 const PostForm = () => {
   const editorRef = useRef<Editor | null>(null)!;
   const [editorContent, setEditorContent] = useState('');
-
   const handleEditorChange = () => {
     if (editorRef.current) {
-      const newContent = editorRef.current?.getInstance().getHTML();
+      const newContent = editorRef.current?.getInstance().getMarkdown();
       setEditorContent(newContent);
+      setValue('content', newContent, {
+        shouldDirty: newContent.trim() !== '',
+      });
     }
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitted, dirtyFields },
+    setValue,
   } = useForm<FieldValues>({
     defaultValues: {
       title: '',
@@ -28,7 +31,6 @@ const PostForm = () => {
     },
   });
   const isFormFilled = Object.keys(dirtyFields).length === 3;
-
   return (
     <section className="flex flex-col w-full h-full gap-4 p-5 sm:max-w-[1080px]">
       <form
@@ -41,38 +43,34 @@ const PostForm = () => {
       >
         <Input
           id="title"
-          label="Title"
+          label="タイトル"
           register={register}
-          placeholder="React Hook Form ライブラリーを使って見た。"
+          placeholder="タイトルを入力してください。"
           errors={errors}
           isSubmitted={isSubmitted}
           required
         />
         <Input
           id="summary"
-          label="Summary"
+          label="要約"
           register={register}
-          placeholder="Formを簡単に実装する。"
+          placeholder="内容を要約してください。"
           errors={errors}
           isSubmitted={isSubmitted}
         />
-        <Textarea
-          id="content"
-          label="Content"
-          placeholder="テキストを入力してください。"
-          errors={errors}
-          register={register}
-          isSubmitted={isSubmitted}
-          required
-        />
+
         <TuiEditor
           content={editorContent}
           editorRef={editorRef}
           onChange={handleEditorChange}
-          {...editorRef.current?.props.onFocus}
         />
 
-        <Button label="Submit" disabled={isSubmitting || !isFormFilled} />
+        <Button
+          label="提出"
+          disabled={
+            isSubmitting || !isFormFilled || editorContent.trim() === ''
+          }
+        />
       </form>
     </section>
   );

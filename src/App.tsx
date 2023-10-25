@@ -30,7 +30,7 @@ function App() {
           marginTop: headerHeight,
           minHeight: mainHeight,
         }}
-        className={`sm:grid place-items-center`}
+        className={`sm:grid sm:place-items-center`}
       >
         <Outlet />
       </main>

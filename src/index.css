@@ -55,8 +55,16 @@ body {
 .toastui-editor-defaultUI {
   @apply border-neutral-300 border-2;
 }
-.toastui-editor-defaultUI:focus {
+
+.editor.active .toastui-editor-defaultUI {
   @apply border-sky-600 border-2;
+}
+.toastui-editor-dark .toastui-editor-toolbar {
+  height: auto;
+}
+.toastui-editor-dark .toastui-editor-md-tab-container {
+  background-color: #232428;
+  border-bottom-color: #303238;
 }
 @layer components {
   .header__line--after {
