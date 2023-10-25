@@ -8,63 +8,76 @@ import PostNewPage from '@/pages/posts/New';
 import ProfilePage from '@/pages/profile';
 import SignInPage from '@/pages/signin';
 import SignUpPage from '@/pages/signup';
-import { createBrowserRouter } from 'react-router-dom';
+import { useState } from 'react';
+import { useRoutes } from 'react-router-dom';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: 'posts',
-        children: [
-          {
-            index: true,
-            element: <PostListPage />,
-          },
-          {
-            path: 'new',
-            element: <PostNewPage />,
-          },
-          {
-            path: ':id',
-            children: [
-              {
-                index: true,
-                element: <PostDetailPage />,
-              },
-              {
-                path: 'edit',
-                children: [
-                  {
-                    index: true,
-                    element: <PostEditPage />,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: 'profile',
-        element: <ProfilePage />,
-      },
-      {
-        path: 'signin',
-        element: <SignInPage />,
-      },
-      {
-        path: 'signup',
-        element: <SignUpPage />,
-      },
-    ],
-  },
-]);
+const AppRoutes = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-export default router;
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: 'posts',
+          children: [
+            {
+              index: true,
+              element: isAuthenticated ? <PostListPage /> : <SignInPage />,
+            },
+            {
+              path: 'new',
+              element: isAuthenticated ? <PostNewPage /> : <SignInPage />,
+            },
+            {
+              path: ':id',
+              children: [
+                {
+                  index: true,
+                  element: isAuthenticated ? (
+                    <PostDetailPage />
+                  ) : (
+                    <SignInPage />
+                  ),
+                },
+                {
+                  path: 'edit',
+                  children: [
+                    {
+                      index: true,
+                      element: <PostEditPage />,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: 'profile',
+          element: isAuthenticated ? <ProfilePage /> : <SignInPage />,
+        },
+        {
+          path: 'signin',
+          element: <SignInPage />,
+        },
+        {
+          path: 'signup',
+          element: <SignUpPage />,
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <ErrorPage />,
+    },
+  ]);
+  return routes;
+};
+
+export default AppRoutes;

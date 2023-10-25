@@ -10,7 +10,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/signup' || location.pathname === '/signout') {
+    if (location.pathname === '/signup' || location.pathname === '/signin') {
       setMainHeight(`calc(100vh - ${headerHeight + 158}px)`);
     } else {
       setMainHeight('90vh');
@@ -30,7 +30,7 @@ function App() {
           marginTop: headerHeight,
           minHeight: mainHeight,
         }}
-        className={`sm:grid sm:place-items-center`}
+        className={`sm:grid sm:place-items-center items-center flex`}
       >
         <Outlet />
       </main>
