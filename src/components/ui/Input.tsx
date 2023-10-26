@@ -67,7 +67,7 @@ const Input = ({
       value: 8,
       message: `${label}は8文字以上でなければなりません`,
     };
-  } else {
+  } else if (id === 'password_confirm') {
     registerValid.validate = (value: string) => {
       if (value === passwordValue && value.length >= 8) {
         return true;

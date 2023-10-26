@@ -21,7 +21,7 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <section className="flex flex-col w-full h-full gap-4 p-5 sm:max-w-[680px]">
+    <div className="flex flex-col w-full h-full gap-4 p-5 sm:max-w-[680px] m-auto">
       <div className="flex items-center justify-between max-w-[680px] pt-5">
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <div className="w-16 h-16 post__profile ">
@@ -40,7 +40,7 @@ const Profile = () => {
           ログアウト
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
