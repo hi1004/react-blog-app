@@ -43,11 +43,19 @@ const AppRoutes = () => {
           children: [
             {
               index: true,
-              element: isAuthenticated ? <PostListPage /> : <SignInPage />,
+              element: isAuthenticated ? (
+                <PostListPage />
+              ) : (
+                <Navigate to="/signin" />
+              ),
             },
             {
               path: 'new',
-              element: isAuthenticated ? <PostNewPage /> : <SignInPage />,
+              element: isAuthenticated ? (
+                <PostNewPage />
+              ) : (
+                <Navigate to="/signin" />
+              ),
             },
             {
               path: ':id',
@@ -57,7 +65,7 @@ const AppRoutes = () => {
                   element: isAuthenticated ? (
                     <PostDetailPage />
                   ) : (
-                    <SignInPage />
+                    <Navigate to="/signin" />
                   ),
                 },
                 {
@@ -68,7 +76,7 @@ const AppRoutes = () => {
                       element: isAuthenticated ? (
                         <PostEditPage />
                       ) : (
-                        <SignInPage />
+                        <Navigate to="/signin" />
                       ),
                     },
                   ],
@@ -79,7 +87,11 @@ const AppRoutes = () => {
         },
         {
           path: 'profile',
-          element: isAuthenticated ? <ProfilePage /> : <SignInPage />,
+          element: isAuthenticated ? (
+            <ProfilePage />
+          ) : (
+            <Navigate to="/signin" />
+          ),
         },
         {
           path: 'signin',

@@ -1,7 +1,10 @@
+import AuthContext from '@/context/AuthContext';
+import { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const PostDetail = () => {
+  const { user } = useContext(AuthContext);
   return (
     <section className="flex flex-col w-full h-full p-5 sm:max-w-[680px]">
       <div className="mt-10 mb-4 text-4xl font-bold">
@@ -11,7 +14,7 @@ const PostDetail = () => {
         <div className="post__profile w-9 h-9 ">
           <FaUserCircle className="w-full h-full text-sky-600" />
         </div>
-        <div className="text-gray-400 post__author">name</div>
+        <div className="text-gray-400 post__author">{user?.displayName}</div>
         <span className="text-gray-400 ">
           {new Date().toLocaleDateString()}
         </span>

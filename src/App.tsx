@@ -33,7 +33,7 @@ function App() {
           marginTop: headerHeight,
           minHeight: mainHeight,
         }}
-        className={`sm:grid sm:place-items-center flex flex-col`}
+        className={`sm:grid sm:place-items-center justify-center md:justify-normal flex flex-col`}
       >
         <Outlet />
       </main>
