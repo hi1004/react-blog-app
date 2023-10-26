@@ -32,7 +32,7 @@ const PostForm = () => {
   });
   const isFormFilled = Object.keys(dirtyFields).length === 3;
   return (
-    <section className="flex flex-col w-full h-full gap-4 p-5 sm:max-w-[1080px]">
+    <section className="flex flex-col justify-center w-full h-full gap-4 p-5 sm:max-w-[1080px]">
       <form
         onSubmit={handleSubmit(async (data) => {
           await new Promise((r) => setTimeout(r, 1000));
@@ -57,6 +57,7 @@ const PostForm = () => {
           placeholder="内容を要約してください。"
           errors={errors}
           isSubmitted={isSubmitted}
+          required
         />
 
         <TuiEditor

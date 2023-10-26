@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-lg
-        hover:opacity-80
+        pointerhover:hover:opacity-80
         w-full
         ${outline ? 'bg-white' : 'bg-sky-600'}
         ${outline ? 'border-sky-600' : 'border-sky-600'}
