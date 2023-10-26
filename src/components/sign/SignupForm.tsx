@@ -1,13 +1,22 @@
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import { app } from '@/firebase';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from 'firebase/auth';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitted, dirtyFields },
+    watch,
+    getValues,
+    formState: { errors, isSubmitting, isSubmitted },
   } = useForm<FieldValues>({
     defaultValues: {
       email: '',
@@ -16,16 +25,37 @@ const SignupForm = () => {
       password_confirm: '',
     },
   });
-  const isFormFilled = Object.keys(dirtyFields).length === 4;
+  const hasNoErrors = Object.keys(errors).length === 0;
+  const onSubmit = handleSubmit(async (data) => {
+    const { email, password, username } = data;
+    try {
+      const auth = getAuth(app);
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      if (user) {
+        await updateProfile(user, {
+          displayName: username,
+        });
+      }
+      toast.success('新規会員登録に成功しました');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.code);
+    }
+  });
+
   return (
     <section className="flex flex-col h-full justify-center w-full gap-4 p-5 sm:max-w-[80%] md:max-w-[1280px] ">
       <div className="flex flex-col gap-4 sm:gap-8 md:flex-row">
         <form
-          onSubmit={handleSubmit(async (data) => {
-            await new Promise((r) => setTimeout(r, 1000));
-            alert(JSON.stringify(data));
-          })}
-          method="POST"
+          onSubmit={onSubmit}
           className="flex flex-col justify-center flex-1 max-w-full gap-6"
         >
           <h1 className="pb-1 pl-2 text-4xl font-bold border-l-8 md:mb-5 border-l-sky-600">
@@ -34,16 +64,18 @@ const SignupForm = () => {
           <div className="flex flex-col gap-4">
             <Input
               id="email"
-              type="email"
               label="メールアドレス"
               register={register}
               placeholder="example@example.com"
               errors={errors}
               position
+              watch={watch}
+              getValues={getValues}
               isIcon
               isSubmitted={isSubmitted}
               required
             />
+
             <Input
               id="username"
               label="ニックネーム"
@@ -52,6 +84,7 @@ const SignupForm = () => {
               isIcon
               placeholder="びょんびょん"
               errors={errors}
+              watch={watch}
               isSubmitted={isSubmitted}
               required
             />
@@ -62,6 +95,7 @@ const SignupForm = () => {
               register={register}
               position
               isIcon
+              watch={watch}
               placeholder="＊＊＊＊＊＊＊＊＊"
               errors={errors}
               isSubmitted={isSubmitted}
@@ -73,6 +107,7 @@ const SignupForm = () => {
               label="パスワード確認"
               register={register}
               position
+              watch={watch}
               isIcon
               placeholder="＊＊＊＊＊＊＊＊＊"
               errors={errors}
@@ -83,7 +118,7 @@ const SignupForm = () => {
 
           <Button
             label="新規会員登録"
-            disabled={isSubmitting || !isFormFilled}
+            disabled={isSubmitting || !hasNoErrors}
           />
         </form>
         <div className="h-[1px] md:w-[1px] sm:h-full border"></div>
@@ -94,7 +129,7 @@ const SignupForm = () => {
             </h2>
           </div>
           <Link to="/signin" className="flex md:w-[60%] w-full">
-            <Button label="ログインする" color="-green-600" />
+            <Button label="ログインする" outline />
           </Link>
         </div>
       </div>

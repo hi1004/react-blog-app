@@ -3,6 +3,8 @@ import Header from '@/components/layout/Header';
 import ScrollToTop from '@/components/scroll/ScrollToTop';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [headerHeight, setHeaderHeight] = useState<number>(93);
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <ScrollToTop />
       <Header getHeaderHeight={updateHeaderHeight} />
       <main
@@ -30,7 +33,7 @@ function App() {
           marginTop: headerHeight,
           minHeight: mainHeight,
         }}
-        className={`sm:grid sm:place-items-center items-center flex`}
+        className={`sm:grid sm:place-items-center flex flex-col`}
       >
         <Outlet />
       </main>

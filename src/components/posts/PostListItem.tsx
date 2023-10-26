@@ -24,7 +24,13 @@ const PostListItem = ({ id }: PostListItemProps) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
             veritatis blanditiis? Tenetur placeat ipsam enim magnam quae
             architecto, velit alias, quod vero adipisci quisquam cupiditate eum
-            accusantium cum aliquam maxime?
+            accusantium cum aliquam maxime?Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Iure impedit nam maxime voluptatum
+            architecto unde commodi ea aspernatur, necessitatibus iste?Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Velit placeat
+            tempore cum, officiis accusamus, similique repellat minima
+            cupiditate recusandae mollitia impedit commodi facere sunt quam
+            libero doloremque veritatis modi iste.
           </p>
         </div>
       </Link>

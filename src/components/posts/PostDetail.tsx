@@ -26,7 +26,25 @@ const PostDetail = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
         veritatis blanditiis? Tenetur placeat ipsam enim magnam quae architecto,
         velit alias, quod vero adipisci quisquam cupiditate eum accusantium cum
-        aliquam maxime?
+        aliquam maxime?Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Libero, veritatis blanditiis? Tenetur placeat ipsam enim magnam quae
+        architecto, velit alias, quod vero adipisci quisquam cupiditate eum
+        accusantium cum aliquam maxime?Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Libero, veritatis blanditiis? Tenetur placeat ipsam
+        enim magnam quae architecto, velit alias, quod vero adipisci quisquam
+        cupiditate eum accusantium cum aliquam maxime?Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Libero, veritatis blanditiis? Tenetur
+        placeat ipsam enim magnam quae architecto, velit alias, quod vero
+        adipisci quisquam cupiditate eum accusantium cum aliquam maxime?Lorem
+        ipsum dolor sit amet consectetur adipisicing elit. Libero, veritatis
+        blanditiis? Tenetur placeat ipsam enim magnam quae architecto, velit
+        alias, quod vero adipisci quisquam cupiditate eum accusantium cum
+        aliquam maxime?Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Libero, veritatis blanditiis? Tenetur placeat ipsam enim magnam quae
+        architecto, velit alias, quod vero adipisci quisquam cupiditate eum
+        accusantium cum aliquam maxime?Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Libero, veritatis blanditiis? Tenetur placeat ipsam
+        enim magnam quae architecto, velit alias, quod vero adipisci quisquam c
       </p>
     </section>
   );

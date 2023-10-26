@@ -7,7 +7,6 @@ interface ButtonProps {
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
-  color?: string;
   icon?: IconType;
 }
 
@@ -17,7 +16,6 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   outline,
   small,
-  color,
   icon: Icon,
 }) => {
   return (
@@ -32,12 +30,8 @@ const Button: React.FC<ButtonProps> = ({
         rounded-lg
         pointerhover:hover:opacity-80
         w-full
-        ${outline ? 'bg-white' : `${color ? `bg${color}` : 'bg-sky-600'}`}
-        ${
-          outline
-            ? 'border-sky-600'
-            : `${color ? `border${color}` : 'border-sky-600'}`
-        }
+        ${outline ? 'bg-white' : 'bg-sky-600'}
+        ${outline ? 'border-sky-600' : 'border-sky-600'}
         ${outline ? 'text-sky-600' : 'text-white'}
         ${small ? 'text-sm' : 'text-md'}
         ${small ? 'py-1' : 'py-3'}

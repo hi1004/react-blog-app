@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import App from '@/App';
+import Loader from '@/components/ui/Loader';
+import { app } from '@/firebase';
 import ErrorPage from '@/pages/ErrorPage';
 import HomePage from '@/pages/home';
 import PostListPage from '@/pages/posts';
@@ -8,16 +11,28 @@ import PostNewPage from '@/pages/posts/New';
 import ProfilePage from '@/pages/profile';
 import SignInPage from '@/pages/signin';
 import SignUpPage from '@/pages/signup';
-import { useState } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 const AppRoutes = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const auth = getAuth(app);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    !!auth?.currentUser
+  );
+  const [init, setInit] = useState<boolean>(false);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      user ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      setInit(true);
+    });
+  }, [auth]);
 
   const routes = useRoutes([
     {
       path: '/',
-      element: <App />,
+      element: init ? <App /> : <Loader />,
       children: [
         {
           index: true,
@@ -50,7 +65,11 @@ const AppRoutes = () => {
                   children: [
                     {
                       index: true,
-                      element: <PostEditPage />,
+                      element: isAuthenticated ? (
+                        <PostEditPage />
+                      ) : (
+                        <SignInPage />
+                      ),
                     },
                   ],
                 },
@@ -64,11 +83,11 @@ const AppRoutes = () => {
         },
         {
           path: 'signin',
-          element: <SignInPage />,
+          element: !isAuthenticated ? <SignInPage /> : <Navigate to="/" />,
         },
         {
           path: 'signup',
-          element: <SignUpPage />,
+          element: !isAuthenticated ? <SignUpPage /> : <Navigate to="/" />,
         },
       ],
     },
@@ -77,6 +96,7 @@ const AppRoutes = () => {
       element: <ErrorPage />,
     },
   ]);
+
   return routes;
 };
 
