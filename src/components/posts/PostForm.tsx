@@ -1,14 +1,15 @@
+import { PostListProps } from '@/components/posts/PostList';
 import TuiEditor from '@/components/posts/TuiEditor';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import AuthContext from '@/context/AuthContext';
 import { db } from '@/firebase';
 import { Editor } from '@toast-ui/react-editor';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const PostForm = () => {
   const editorRef = useRef<Editor | null>(null)!;
@@ -24,7 +25,27 @@ const PostForm = () => {
       });
     }
   };
+  const [post, setPost] = useState<PostListProps | null>(null);
+  const params = useParams();
+  const getPost = async (id: string) => {
+    if (id) {
+      const docRef = doc(db, 'posts', id);
+      const docSnap = await getDoc(docRef);
 
+      setPost({ id: docSnap.id, ...(docSnap.data() as PostListProps) });
+    }
+  };
+  useEffect(() => {
+    if (params?.id) getPost(params?.id);
+  }, [params?.id]);
+  useEffect(() => {
+    if (post) {
+      setValue('title', post.title);
+      setValue('summary', post.summary);
+      editorRef.current?.getInstance().setHTML(post.content);
+    }
+  }, [post]);
+  console.log(editorRef?.current?.getInstance().getMarkdown(post?.content));
   const {
     register,
     handleSubmit,
@@ -40,16 +61,38 @@ const PostForm = () => {
   const onSubmit = handleSubmit(async (data) => {
     const { title, summary, content } = data;
     try {
-      await addDoc(collection(db, 'posts'), {
-        title,
-        summary,
-        content,
-        createdAt: new Date()?.toLocaleDateString(),
-        email: user?.email,
-        userName: user?.displayName,
-      });
-      toast.success('ブログが作成されました');
-      navigate('/');
+      if (post && post.id) {
+        const postRef = doc(db, 'posts', post?.id);
+        await updateDoc(postRef, {
+          title,
+          summary,
+          content,
+          updatedAt: new Date()?.toLocaleDateString('ja', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          }),
+        });
+        toast?.success('ブログを修正しました');
+        navigate(`/posts/${post.id}`);
+      } else {
+        await addDoc(collection(db, 'posts'), {
+          title,
+          summary,
+          content,
+          createdAt: new Date()?.toLocaleDateString('ja', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          }),
+          email: user?.email,
+          userName: user?.displayName,
+          uid: user?.uid,
+        });
+        toast.success('ブログが作成されました');
+        navigate('/');
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
@@ -89,9 +132,11 @@ const PostForm = () => {
         />
 
         <Button
-          label="提出"
+          label={post ? '修正' : '提出'}
           disabled={
-            isSubmitting || !isFormFilled || editorContent.trim() === ''
+            isSubmitting || post
+              ? !editorRef?.current?.getInstance().getMarkdown(post?.content)
+              : !isFormFilled || editorContent.trim() === ''
           }
         />
       </form>

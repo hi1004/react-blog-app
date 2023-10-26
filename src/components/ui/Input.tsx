@@ -46,11 +46,9 @@ const Input = ({
   isSubmitted,
 }: InputProps) => {
   const errorMessage = (errors[id] as FieldError)?.message || '';
-
   const passwordValue = watch && watch('password');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const registerValid: Record<string, any> = {};
-
   if (id === 'email') {
     registerValid.pattern = {
       value:

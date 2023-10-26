@@ -5,7 +5,7 @@ const ProfilePage = () => {
   return (
     <section className="max-w-[640px] w-full">
       <Profile />
-      <PostList />
+      <PostList hasNavigation={false} />
     </section>
   );
 };
