@@ -3,10 +3,10 @@ import Profile from '@/components/profile/Profile';
 
 const ProfilePage = () => {
   return (
-    <>
+    <section className="max-w-[680px] w-full">
       <Profile />
-      <PostList />
-    </>
+      <PostList hasNavigation={false} />
+    </section>
   );
 };
 

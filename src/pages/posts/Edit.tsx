@@ -1,7 +1,7 @@
-import PostEdit from '@/components/posts/PostEdit';
+import PostForm from '@/components/posts/PostForm';
 
 const PostEditPage = () => {
-  return <PostEdit />;
+  return <PostForm />;
 };
 
 export default PostEditPage;

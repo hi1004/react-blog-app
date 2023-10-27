@@ -46,11 +46,9 @@ const Input = ({
   isSubmitted,
 }: InputProps) => {
   const errorMessage = (errors[id] as FieldError)?.message || '';
-
   const passwordValue = watch && watch('password');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const registerValid: Record<string, any> = {};
-
   if (id === 'email') {
     registerValid.pattern = {
       value:
@@ -67,7 +65,7 @@ const Input = ({
       value: 8,
       message: `${label}は8文字以上でなければなりません`,
     };
-  } else {
+  } else if (id === 'password_confirm') {
     registerValid.validate = (value: string) => {
       if (value === passwordValue && value.length >= 8) {
         return true;

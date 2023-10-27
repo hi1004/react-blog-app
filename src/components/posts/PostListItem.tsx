@@ -1,47 +1,71 @@
+import { PostListProps } from '@/components/posts/PostList';
 import AuthContext from '@/context/AuthContext';
+import { db } from '@/firebase';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-interface PostListItemProps {
-  id: number;
+interface PostListItem {
+  post: PostListProps;
+  getPosts: () => void;
+  setLoading: (isLoading: boolean) => void;
 }
-
-const PostListItem = ({ id }: PostListItemProps) => {
+const PostListItem = ({ post, getPosts, setLoading }: PostListItem) => {
   const { user } = useContext(AuthContext);
+  const handleDelete = async (id: string) => {
+    const confirm = window.confirm('該当ブログを削除しますか？');
+    if (confirm && id) {
+      await deleteDoc(doc(db, 'posts', id));
+      toast.success('ブログを削除しました');
+      setLoading(true);
+      getPosts();
+    }
+  };
+
   return (
-    <li className="py-6 leading-6 border-t border-t-gray-200">
-      <Link to={`/posts/${id}`}>
-        <div className="flex items-center gap-2 text-sm post__profile-box">
+    <li className="py-6 pl-4 leading-6 border-t odd:border-t-gray-200 even:bg-slate-100 rounded-xl">
+      <div
+        className={`flex justify-between items-center gap-2 text-sm post__profile-box`}
+        role="presentation"
+      >
+        <div className="flex gap-2">
           <div className="post__profile w-9 h-9 ">
             <FaUserCircle className="w-full h-full text-sky-600" />
           </div>
-          <div className="text-gray-400 post__author">{user?.email}</div>
-          <div className="text-gray-400 post__author">{user?.displayName}</div>
-          <span className="text-gray-400">
-            {new Date().toLocaleDateString()}
-          </span>
+
+          <address className="flex flex-col not-italic">
+            <div className="text-gray-700 post__author">{post?.userName}</div>
+            <div className="text-xs text-gray-400 post__author">
+              {post?.email}
+            </div>
+          </address>
         </div>
-        <div className="pointerhover:hover:underline">
-          <div className="my-3 text-xl font-bold">posts {id}</div>
-          <p className="text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
-            veritatis blanditiis? Tenetur placeat ipsam enim magnam quae
-            architecto, velit alias, quod vero adipisci quisquam cupiditate eum
-            accusantium cum aliquam maxime?Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Iure impedit nam maxime voluptatum
-            architecto unde commodi ea aspernatur, necessitatibus iste?Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Velit placeat
-            tempore cum, officiis accusamus, similique repellat minima
-            cupiditate recusandae mollitia impedit commodi facere sunt quam
-            libero doloremque veritatis modi iste.
-          </p>
+      </div>
+      <Link to={`/posts/${post?.id}`}>
+        <div className="pl-10 pointerhover:hover:underline">
+          <div className="my-3 text-xl font-bold">{post?.title}</div>
+          <p className="text-gray-500">{post?.summary}</p>
         </div>
       </Link>
-      <div className="flex flex-row-reverse gap-2 mr-3 text-sm text-gray-400 post__utill-box">
-        <button className="pointerhover:hover:text-gray-800">修正</button>
-        <button className="pointerhover:hover:text-gray-800">削除</button>
-      </div>
+      <span className="block pl-10 mr-3 text-sm text-right text-gray-400">
+        {post?.createdAt}
+      </span>
+      {post?.email === user?.email && (
+        <div className="flex flex-row-reverse gap-2 mr-3 text-sm text-gray-400 post__utill-box">
+          <button
+            className="pointerhover:hover:text-gray-800"
+            role="presentation"
+            onClick={() => handleDelete(post?.id as string)}
+          >
+            削除
+          </button>
+          <button className="pointerhover:hover:text-gray-800">
+            <Link to={`/posts/${post?.id}/edit`}>修正</Link>
+          </button>
+        </div>
+      )}
     </li>
   );
 };

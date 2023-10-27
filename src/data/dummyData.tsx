@@ -1,9 +1,9 @@
 // carousel data
 const IMAGE_1_URL =
-  'https://plus.unsplash.com/premium_photo-1678565879444-f87c8bd9f241?auto=format&fit=crop&q=80&w=3570&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+  'https://www.mindinventory.com/blog/wp-content/uploads/2022/10/frontend-development-tools.png';
 
 const IMAGE_2_URL =
-  'https://www.freecodecamp.org/news/content/images/2022/08/pexels-antonio-batinic--4164418--1-.jpg';
+  'https://miro.medium.com/v2/resize:fit:800/1*bthRXJ_FBspSEijOWIRM2A.png';
 
 const IMAGE_3_URL =
   'https://miro.medium.com/v2/resize:fit:1200/0*XCgoYU9sqt95P8J0.png';

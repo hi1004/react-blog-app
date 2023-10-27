@@ -1,6 +1,6 @@
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center h-[100vh]">
+    <div className="left-[50%] top-[50%] transform -translate-x-[50%] -translate-y-[50%] absolute">
       <div role="status">
         <svg
           aria-hidden="true"
