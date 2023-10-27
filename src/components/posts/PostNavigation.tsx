@@ -6,7 +6,7 @@ interface PostNavigationProps {
 }
 const PostNavigation = ({ setActiveTab, activeTab }: PostNavigationProps) => {
   return (
-    <nav className="flex gap-6 max-w-[680px] m-auto pt-9 px-5">
+    <nav className="flex gap-3 sm:gap-6 max-w-[680px] m-auto pt-2 sm:pt-4 px-5">
       <button
         className={`${
           activeTab === 'all' ? 'font-bold' : ''

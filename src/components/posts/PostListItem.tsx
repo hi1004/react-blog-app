@@ -44,28 +44,30 @@ const PostListItem = ({ post, getPosts, setLoading }: PostListItem) => {
         </div>
       </div>
       <Link to={`/posts/${post?.id}`}>
-        <div className="pl-10 pointerhover:hover:underline">
+        <div className="pl-0 sm:pl-10 pointerhover:hover:underline">
           <div className="my-3 text-xl font-bold">{post?.title}</div>
           <p className="text-gray-500">{post?.summary}</p>
         </div>
       </Link>
-      <span className="block pl-10 mr-3 text-sm text-right text-gray-400">
-        {post?.createdAt}
-      </span>
-      {post?.email === user?.email && (
-        <div className="flex flex-row-reverse gap-2 mr-3 text-sm text-gray-400 post__utill-box">
-          <button
-            className="pointerhover:hover:text-gray-800"
-            role="presentation"
-            onClick={() => handleDelete(post?.id as string)}
-          >
-            削除
-          </button>
-          <button className="pointerhover:hover:text-gray-800">
-            <Link to={`/posts/${post?.id}/edit`}>修正</Link>
-          </button>
-        </div>
-      )}
+      <div className="flex justify-end gap-2 mt-4">
+        <span className="block pl-10 mr-3 text-sm text-right text-gray-400">
+          {post?.createdAt}
+        </span>
+        {post?.email === user?.email && (
+          <div className="flex flex-row-reverse gap-2 mr-3 text-sm text-gray-400 post__utill-box">
+            <button
+              className="pointerhover:hover:text-gray-800"
+              role="presentation"
+              onClick={() => handleDelete(post?.id as string)}
+            >
+              削除
+            </button>
+            <button className="pointerhover:hover:text-gray-800">
+              <Link to={`/posts/${post?.id}/edit`}>修正</Link>
+            </button>
+          </div>
+        )}
+      </div>
     </li>
   );
 };

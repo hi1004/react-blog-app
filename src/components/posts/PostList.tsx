@@ -81,7 +81,14 @@ const PostList = ({
   return (
     <>
       {hasNavigation && (
-        <PostNavigation setActiveTab={setActiveTab} activeTab={activeTab} />
+        <>
+          <div className="max-w-[680px] m-auto p-5">
+            <h1 className="w-full pb-1 pl-2 m-auto mt-2 text-3xl font-bold border-l-8 sm:text-4xl border-l-sky-600">
+              List of Blogs<span className="ml-4 text-sm">記事一覧</span>
+            </h1>
+          </div>
+          <PostNavigation setActiveTab={setActiveTab} activeTab={activeTab} />
+        </>
       )}
 
       <ul className="max-w-[680px] w-full m-auto p-5 relative">
