@@ -5,9 +5,10 @@ interface LabelProps {
   label: string;
   position?: boolean;
   errors: FieldErrors;
+  comment?: boolean;
 }
 
-const Label = ({ htmlFor, label, position, errors }: LabelProps) => {
+const Label = ({ htmlFor, label, position, errors, comment }: LabelProps) => {
   return (
     <label
       htmlFor={htmlFor}
@@ -22,6 +23,7 @@ const Label = ({ htmlFor, label, position, errors }: LabelProps) => {
         ? 'absolute top-5 transform -translate-y-3 pl-4'
         : 'relative text-black'
     }
+    ${comment ? 'font-bold' : 'font-medium'}
     peer-placeholder-shown:scale-100 
     peer-placeholder-shown:translate-y-0
     peer-focus:scale-75

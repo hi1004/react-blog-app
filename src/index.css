@@ -66,6 +66,18 @@ body {
   background-color: #232428;
   border-bottom-color: #303238;
 }
+.toastui-editor-contents p,
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4,
+.toastui-editor-contents h5,
+.toastui-editor-contents h6 {
+  margin: 0px !important;
+}
+.toastui-editor-contents p {
+  font-size: 16px;
+}
 @layer components {
   .header__line--after {
     @apply after:content-[''] after:absolute after:w-[1px] after:h-[60%] after:top-[50%] after:translate-y-[-50%] after:bg-slate-400 after:right-[-8px];

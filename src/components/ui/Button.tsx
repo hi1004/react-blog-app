@@ -8,6 +8,7 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
+  comment?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   outline,
   small,
+  comment,
   icon: Icon,
 }) => {
   return (
@@ -24,18 +26,17 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       className={`
-        relative
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-lg
         pointerhover:hover:opacity-80
-        w-full
+        ${comment ? 'w-[120px] absolute right-0' : 'w-full relative'}
         ${outline ? 'bg-white' : 'bg-sky-600'}
         ${outline ? 'border-sky-600' : 'border-sky-600'}
         ${outline ? 'text-sky-600' : 'text-white'}
         ${small ? 'text-sm' : 'text-md'}
         ${small ? 'py-1' : 'py-3'}
-        ${small ? 'font-light' : 'font-semibold'}
+        ${small ? 'font-medium' : 'font-semibold'}
         ${small ? 'border-[1px]' : 'border-2'}
       `}
     >
