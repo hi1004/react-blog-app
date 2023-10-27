@@ -28,7 +28,7 @@ const Header = ({ getHeaderHeight }: HeaderProps) => {
       className="flex bg-zinc-50 flex-col justify-center gap-4 border-b-[1px] items-center border-b-slate-300 px-[10px] py-7 fixed w-full z-10 top-0 left-0 sm:flex-row  sm:justify-between sm:px-6 md:px-10"
     >
       <Link to="/" className="text-3xl font-bold">
-        <span className="text-sky-600">ICHIGOICHIE</span>
+        <span className="text-sky-600">React </span>Blog
       </Link>
       <nav>
         <ul className="flex gap-4">
