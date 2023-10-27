@@ -1,33 +1,80 @@
+import { CommentsInterface, PostListProps } from '@/components/posts/PostList';
 import Button from '@/components/ui/Button';
 import Textarea from '@/components/ui/Textarea';
+import AuthContext from '@/context/AuthContext';
+import { db } from '@/firebase';
+import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { useContext } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-const COMMENTS = [
-  {
-    id: 1,
-    email: 'test@example.com',
-    content: 'lorem ipsum dolor',
-    userName: 'boyreda',
-    createdAt: new Date().toLocaleDateString(),
-  },
-  {
-    id: 2,
-    email: 'test@example.com',
-    userName: 'dffdd',
-    content: 'dsafasf',
-    createdAt: new Date().toLocaleDateString(),
-  },
-];
-const onSubmit = () => {};
-const PostComments = () => {
+interface PostCommentsProps {
+  post: PostListProps;
+  getPost: (id: string) => void;
+}
+
+const PostComments = ({ post, getPost }: PostCommentsProps) => {
+  const { user } = useContext(AuthContext);
   const {
     register,
+    handleSubmit,
+    setValue,
     formState: { errors, isSubmitted },
   } = useForm<FieldValues>({
     defaultValues: {
       comment: '',
     },
   });
+  const onSubmit = handleSubmit(async (data) => {
+    const { comment } = data;
+    try {
+      if (post && post?.id) {
+        const postRef = doc(db, 'posts', post.id);
+        if (user?.uid) {
+          const commentObj = {
+            content: comment,
+            uid: user.uid,
+            email: user.email,
+            userName: user.displayName,
+            createdAt: new Date()?.toLocaleDateString('ja', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          };
+          await updateDoc(postRef, {
+            comments: arrayUnion(commentObj),
+            updateDated: new Date()?.toLocaleDateString('ja', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          });
+          getPost(post.id);
+          setValue('comment', '');
+        }
+      }
+      toast.success('コメントを追加しました');
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.code);
+    }
+  });
+
+  const handleDeleteComment = async (comment: CommentsInterface) => {
+    const confirm = window.confirm('このコメントを削除しますか？');
+    if (confirm && post.id) {
+      const postRef = doc(db, 'posts', post?.id);
+      await updateDoc(postRef, {
+        comments: arrayRemove(comment),
+      });
+      toast.success('コメントを削除しました');
+      await getPost(post.id);
+    }
+  };
+
   return (
     <div className="relative">
       <form onSubmit={onSubmit}>
@@ -43,23 +90,35 @@ const PostComments = () => {
         <Button label="入力" small comment />
       </form>
       <ul className="mt-10 comment__list">
-        {COMMENTS?.map((comment) => (
-          <li key={comment.id} className="flex flex-col gap-2 py-3 border-b">
-            <address className="flex not-italic">
-              <div className="flex items-center gap-1">
-                <div>{comment?.userName}</div>
-                <div className="text-sm text-gray-400">{comment?.email}</div>
-                <div className="text-sm text-gray-400">
-                  {comment?.createdAt}
+        {post?.comments
+          ?.slice(0)
+          .reverse()
+          .map((comment) => (
+            <li
+              key={comment.createdAt}
+              className="flex flex-col gap-2 py-3 border-b"
+            >
+              <address className="flex not-italic">
+                <div className="flex items-center gap-3">
+                  <div>{comment?.userName}</div>
+                  <div className="text-sm text-gray-400">{comment?.email}</div>
+                  <div className="text-sm text-gray-400">
+                    {comment?.createdAt}
+                  </div>
+                  {comment?.uid === user?.uid && (
+                    <div
+                      className="text-sm text-gray-400 underline cursor-pointer pointerhover:hover:text-gray-800"
+                      role="presentation"
+                      onClick={() => handleDeleteComment(comment)}
+                    >
+                      削除
+                    </div>
+                  )}
                 </div>
-                <div className="text-sm text-gray-400 underline cursor-pointer pointerhover:hover:text-gray-800">
-                  delete
-                </div>
-              </div>
-            </address>
-            <div className="text-sm text-gray-800">{comment?.content}</div>
-          </li>
-        ))}
+              </address>
+              <div className="text-sm text-gray-800">{comment?.content}</div>
+            </li>
+          ))}
       </ul>
     </div>
   );

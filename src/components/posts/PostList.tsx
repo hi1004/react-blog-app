@@ -8,10 +8,11 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export interface CommentInterface {
+export interface CommentsInterface {
   content: string;
   uid: string;
   email: string;
+  userName: string;
   createdAt: string;
 }
 export interface PostListProps {
@@ -25,7 +26,7 @@ export interface PostListProps {
   updatedAt?: string;
   uid: string;
   category?: CategoryType;
-  comments?: CommentInterface[];
+  comments?: CommentsInterface[];
 }
 interface NavigationType {
   hasNavigation?: boolean;

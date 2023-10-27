@@ -19,8 +19,6 @@ const PostDetail = () => {
     if (id) {
       const docRef = doc(db, 'posts', id);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap?.data());
-
       setPost({ id: docSnap.id, ...(docSnap.data() as PostListProps) });
     }
   };
@@ -60,7 +58,7 @@ const PostDetail = () => {
             </div>
           </div>
 
-          <div className="flex items-end justify-between py-4 text-sm text-gray-400 border-b post__utill-box">
+          <div className="flex items-center justify-between py-4 text-sm text-gray-400 border-b post__utill-box">
             <div className="flex flex-col-reverse items-center gap-3 ">
               {post?.email === user?.email && (
                 <div className="flex gap-2">
@@ -83,10 +81,10 @@ const PostDetail = () => {
             </div>
             <span className="text-gray-400 ">{post?.createdAt}</span>
           </div>
-          <div className="px-5 py-3 mt-5 bg-gray-100">
+          <div className="px-5 my-5 bg-gray-100 py-9">
             <Viewer initialValue={post?.content} />
           </div>
-          <PostComments />
+          <PostComments post={post} getPost={getPost} />
         </section>
       ) : (
         <Loader />
