@@ -5,7 +5,7 @@ const ProfilePage = () => {
   return (
     <section className="max-w-[680px] w-full">
       <Profile />
-      <PostList hasNavigation={false} />
+      <PostList hasNavigation={false} defaultTab="my" />
     </section>
   );
 };
