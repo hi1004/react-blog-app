@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <section className="relative w-full">
       <Carousel />
-      <PostList />
+      <PostList hasListTitle={false} />
     </section>
   );
 };

@@ -30,6 +30,7 @@ export interface PostListProps {
 }
 interface NavigationType {
   hasNavigation?: boolean;
+  hasListTitle?: boolean;
   defaultTab?: TabType | CategoryType;
 }
 export type TabType = 'all' | 'my';
@@ -38,6 +39,7 @@ export const CATEGORIES: CategoryType[] = ['Frontend', 'JavaScript', 'React'];
 
 const PostList = ({
   hasNavigation = true,
+  hasListTitle = true,
   defaultTab = 'all',
 }: NavigationType) => {
   const [posts, setPosts] = useState<PostListProps[]>([]);
@@ -83,10 +85,13 @@ const PostList = ({
       {hasNavigation && (
         <>
           <div className="max-w-[680px] m-auto p-5">
-            <h1 className="w-full pb-1 pl-2 m-auto mt-2 text-3xl font-bold border-l-8 sm:text-4xl border-l-sky-600">
-              List of Blogs<span className="ml-4 text-sm">記事一覧</span>
-            </h1>
+            {hasListTitle && (
+              <h1 className="w-full pb-1 pl-2 m-auto mt-2 text-3xl font-bold border-l-8 sm:text-4xl border-l-sky-600">
+                List of Blogs<span className="ml-4 text-sm">記事一覧</span>
+              </h1>
+            )}
           </div>
+
           <PostNavigation setActiveTab={setActiveTab} activeTab={activeTab} />
         </>
       )}

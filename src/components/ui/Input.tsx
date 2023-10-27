@@ -8,7 +8,12 @@ import {
   UseFormRegister,
   UseFormWatch,
 } from 'react-hook-form';
-import { AiFillEye, AiFillEyeInvisible, AiOutlineUser } from 'react-icons/ai';
+import {
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiOutlineUser,
+  AiOutlineWarning,
+} from 'react-icons/ai';
 import { BiCheckSquare } from 'react-icons/bi';
 import { CgDanger } from 'react-icons/cg';
 import { FcApproval } from 'react-icons/fc';
@@ -28,6 +33,7 @@ interface InputProps {
   getValues?: UseFormGetValues<FieldValues>;
   errors: FieldErrors;
   isSubmitted: boolean;
+  error?: boolean;
   isIcon?: boolean;
 }
 
@@ -37,6 +43,7 @@ const Input = ({
   type = 'text',
   disabled,
   position,
+  error,
   register,
   required,
   placeholder,
@@ -47,6 +54,7 @@ const Input = ({
 }: InputProps) => {
   const errorMessage = (errors[id] as FieldError)?.message || '';
   const passwordValue = watch && watch('password');
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const registerValid: Record<string, any> = {};
   if (id === 'email') {
@@ -82,6 +90,7 @@ const Input = ({
   if (type === 'password' && isVisiblePassword) {
     type = 'text';
   }
+
   return (
     <div className="relative w-full">
       <Label htmlFor={id} errors={errors} label={label} position={position} />
@@ -109,35 +118,40 @@ const Input = ({
           disabled:cursor-not-allowed
           ${isIcon ? 'pl-10' : ''}
           ${position ? 'p-4 pt-8' : 'mt-2'}
-          ${errors[id] ? 'border-rose-500' : ''}
+          ${errors[id] ? 'border-rose-500 h-[110px] sm:h-auto' : ''}
           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-sky-600'}
           ${
             isSubmitted
               ? errors[id]
                 ? 'border-rose-500'
-                : 'border-green-600'
+                : 'border-green-600 focus:border-green-600'
               : undefined
           }
+  
         `}
         aria-invalid={isSubmitted ? (errors[id] ? 'true' : 'false') : undefined}
       />
-      {errorMessage && (
-        <div className="absolute bottom-2 right-2 text-rose-500">
-          {
-            <small className="flex items-center gap-1">
-              <CgDanger size={16} /> {errorMessage}
-            </small>
-          }
+
+      {error && isSubmitted && (
+        <div className={`absolute text-orange-500 top-2 right-2`}>
+          <small className="flex items-center gap-1">
+            <AiOutlineWarning size={16} />
+          </small>
         </div>
       )}
 
-      {isSubmitted && !errorMessage && (
-        <div className="absolute bottom-2 right-2">
-          {
-            <small className="flex items-center gap-1">
-              <FcApproval size={16} />
-            </small>
-          }
+      {!error && isSubmitted && !errorMessage && (
+        <div className={`absolute bottom-2 right-2`}>
+          <small className="flex items-center gap-1">
+            <FcApproval size={16} />
+          </small>
+        </div>
+      )}
+      {errorMessage && (
+        <div className="absolute bottom-2 right-2 text-rose-500">
+          <small className="flex items-center gap-1">
+            <CgDanger size={16} /> {errorMessage}
+          </small>
         </div>
       )}
 
@@ -163,6 +177,8 @@ const Input = ({
               role="presentation"
               onMouseDown={() => setIsVisiblePassword(true)}
               onMouseUp={() => setIsVisiblePassword(false)}
+              onTouchStart={() => setIsVisiblePassword(true)}
+              onTouchEnd={() => setIsVisiblePassword(false)}
             >
               {isVisiblePassword
                 ? (id === 'password' || id === 'password_confirm') && (

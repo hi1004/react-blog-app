@@ -2,12 +2,14 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { app } from '@/firebase';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const SigninForm = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -26,9 +28,11 @@ const SigninForm = () => {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('ログインに成功しました');
       navigate('/');
+      setError(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
+      setError(true);
       toast.error(error?.code);
     }
   });
@@ -49,6 +53,7 @@ const SigninForm = () => {
               register={register}
               placeholder="example@example.com"
               errors={errors}
+              error={error}
               position
               isIcon
               isSubmitted={isSubmitted}
@@ -60,6 +65,7 @@ const SigninForm = () => {
               label="パスワード"
               register={register}
               position
+              error={error}
               isIcon
               placeholder="＊＊＊＊＊＊＊＊＊"
               errors={errors}
