@@ -31,9 +31,7 @@ const PostDetail = () => {
       navigate('/');
     }
   };
-  const handleClick = () => {
-    if (post?.email === user?.email) navigate('/profile');
-  };
+
   useEffect(() => {
     if (params?.id) getPost(params?.id);
   }, [params?.id]);
@@ -43,20 +41,23 @@ const PostDetail = () => {
         <section className="flex flex-col w-full h-full p-5 sm:max-w-[680px]">
           <div className="mt-10 mb-4 text-4xl font-bold">{post?.title}</div>
           <div
-            className={`flex items-center gap-2 pb-3 text-sm border-b post__profile-box ${
-              post?.email === user?.email &&
-              'cursor-pointer pointerhover:hover:underline'
-            }`}
+            className={`flex items-center justify-between gap-2 pb-3 text-sm border-b post__profile-box`}
             role="presentation"
-            onClick={handleClick}
           >
-            <div className="post__profile w-9 h-9 ">
-              <FaUserCircle className="w-full h-full text-sky-600" />
+            <div
+              className={`flex gap-2 ${
+                post?.email === user?.email && 'cursor-pointer'
+              }`}
+            >
+              <div className="post__profile w-9 h-9 ">
+                <FaUserCircle className="w-full h-full text-sky-600" />
+              </div>
+              <div className="flex flex-col">
+                <div className="text-gary-700">{post?.userName}</div>
+                <div className="text-xs text-gray-400">{post?.email}</div>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <div className="text-gary-700">{post?.userName}</div>
-              <div className="text-xs text-gray-400">{post?.email}</div>
-            </div>{' '}
+            {post?.category && <div>{post?.category}</div>}
           </div>
 
           <div className="flex justify-between py-4 text-sm text-gray-400 border-b post__utill-box">

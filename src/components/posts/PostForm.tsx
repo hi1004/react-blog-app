@@ -1,7 +1,8 @@
-import { PostListProps } from '@/components/posts/PostList';
+import { CATEGORIES, PostListProps } from '@/components/posts/PostList';
 import TuiEditor from '@/components/posts/TuiEditor';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import Select from '@/components/ui/Select';
 import AuthContext from '@/context/AuthContext';
 import { db } from '@/firebase';
 import { Editor } from '@toast-ui/react-editor';
@@ -42,24 +43,35 @@ const PostForm = () => {
     if (post) {
       setValue('title', post.title);
       setValue('summary', post.summary);
+      setValue('category', post.category);
       editorRef.current?.getInstance().setHTML(post.content);
     }
   }, [post]);
-  console.log(editorRef?.current?.getInstance().getMarkdown(post?.content));
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitted, dirtyFields },
+    formState: { errors, isSubmitting, isSubmitted },
     setValue,
+    watch,
   } = useForm<FieldValues>({
     defaultValues: {
       title: '',
       summary: '',
+      category: CATEGORIES[0],
       content: '',
     },
   });
+  const isDisabled =
+    isSubmitting ||
+    !editorRef?.current?.getInstance().getMarkdown(post?.content) ||
+    editorRef?.current
+      ?.getInstance()
+      .getMarkdown(post?.content)
+      .trim() === '' ||
+    !watch('title') ||
+    !watch('summary');
   const onSubmit = handleSubmit(async (data) => {
-    const { title, summary, content } = data;
+    const { title, summary, content, category } = data;
     try {
       if (post && post.id) {
         const postRef = doc(db, 'posts', post?.id);
@@ -67,6 +79,7 @@ const PostForm = () => {
           title,
           summary,
           content,
+          category,
           updatedAt: new Date()?.toLocaleDateString('ja', {
             hour: '2-digit',
             minute: '2-digit',
@@ -80,6 +93,7 @@ const PostForm = () => {
           title,
           summary,
           content,
+          category,
           createdAt: new Date()?.toLocaleDateString('ja', {
             hour: '2-digit',
             minute: '2-digit',
@@ -99,9 +113,12 @@ const PostForm = () => {
       toast.error(error?.code);
     }
   });
-  const isFormFilled = Object.keys(dirtyFields).length === 3;
+
   return (
     <section className="flex flex-col justify-center w-full h-full gap-4 p-5 sm:max-w-[1080px]">
+      <h1 className="pb-1 pl-2 mb-1 text-4xl font-bold border-l-8 border-l-sky-600">
+        Write a Blog<span className="ml-4 text-sm">ブログを書く</span>
+      </h1>
       <form
         onSubmit={onSubmit}
         className="flex flex-col justify-center max-w-full gap-4"
@@ -115,6 +132,7 @@ const PostForm = () => {
           isSubmitted={isSubmitted}
           required
         />
+
         <Input
           id="summary"
           label="要約"
@@ -124,6 +142,15 @@ const PostForm = () => {
           isSubmitted={isSubmitted}
           required
         />
+        <Select
+          id="category"
+          label="カテゴリ"
+          register={register}
+          errors={errors}
+          isSubmitted={isSubmitted}
+          setValue={setValue}
+          required
+        />
 
         <TuiEditor
           content={editorContent}
@@ -131,14 +158,7 @@ const PostForm = () => {
           onChange={handleEditorChange}
         />
 
-        <Button
-          label={post ? '修正' : '提出'}
-          disabled={
-            isSubmitting || post
-              ? !editorRef?.current?.getInstance().getMarkdown(post?.content)
-              : !isFormFilled || editorContent.trim() === ''
-          }
-        />
+        <Button label={post ? '修正' : '提出'} disabled={isDisabled} />
       </form>
     </section>
   );

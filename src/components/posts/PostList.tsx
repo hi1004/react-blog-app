@@ -8,6 +8,12 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+export interface CommentInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
+}
 export interface PostListProps {
   id?: string;
   title: string;
@@ -18,6 +24,8 @@ export interface PostListProps {
   userName: string;
   updatedAt?: string;
   uid: string;
+  category?: CategoryType;
+  comments?: CommentInterface[];
 }
 interface NavigationType {
   hasNavigation?: boolean;
@@ -32,21 +40,21 @@ const PostList = ({
   defaultTab = 'all',
 }: NavigationType) => {
   const [posts, setPosts] = useState<PostListProps[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType | CategoryType>(
     defaultTab
   );
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState<boolean>(true);
   const getPosts = async () => {
-    const postArray: PostListProps[] = [];
-
+    setPosts([]);
     const postsRef = collection(db, 'posts');
     let postsQuery;
+
     if (activeTab === 'my' && user) {
       postsQuery = query(
         postsRef,
         where('uid', '==', user.uid),
-        orderBy('createdAt', 'asc')
+        orderBy('createdAt', 'desc')
       );
     } else if (activeTab === 'all') {
       postsQuery = query(postsRef, orderBy('createdAt', 'desc'));
@@ -57,22 +65,18 @@ const PostList = ({
         orderBy('createdAt', 'desc')
       );
     }
-
     const datas = await getDocs(postsQuery);
-    setPosts([]);
-
     datas?.forEach((doc) => {
       const dataObj = { ...doc.data(), id: doc.id };
-      postArray.push(dataObj as PostListProps);
+      setPosts((prev) => [...prev, dataObj as PostListProps]);
     });
-
-    setPosts(postArray);
     setLoading(false);
   };
-
   useEffect(() => {
+    setLoading(true);
     getPosts();
-  }, []);
+  }, [activeTab]);
+
   return (
     <>
       {hasNavigation && (
@@ -82,7 +86,12 @@ const PostList = ({
       <ul className="max-w-[680px] w-full m-auto p-5 relative">
         {posts?.length > 0 ? (
           posts?.map((post) => (
-            <PostListItem key={post?.id} post={post} getPosts={getPosts} />
+            <PostListItem
+              key={post?.id}
+              post={post}
+              getPosts={getPosts}
+              setLoading={setLoading}
+            />
           ))
         ) : (
           <>
