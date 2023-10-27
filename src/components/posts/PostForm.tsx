@@ -158,7 +158,7 @@ const PostForm = () => {
           onChange={handleEditorChange}
         />
 
-        <Button label={post ? '修正' : '提出'} disabled={isDisabled} />
+        <Button label={post ? '修正' : '投稿'} disabled={isDisabled} />
       </form>
     </section>
   );

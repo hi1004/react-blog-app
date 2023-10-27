@@ -25,7 +25,7 @@ const Profile = () => {
       <h1 className="max-w-[680px] pb-1 pl-2 mt-3 text-4xl font-bold border-l-8 border-l-sky-600">
         Profile<span className="ml-4 text-sm">プロフィール</span>
       </h1>
-      <div className="flex items-center justify-between max-w-[680px] pt-5">
+      <div className="flex items-end justify-between max-w-[680px] pt-5">
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <div className="w-16 h-16 post__profile ">
             <FaUserCircle className="w-full h-full text-sky-600" />
