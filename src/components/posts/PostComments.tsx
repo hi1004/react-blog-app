@@ -100,11 +100,22 @@ const PostComments = ({ post, getPost }: PostCommentsProps) => {
             >
               <address className="flex not-italic">
                 <div className="flex items-center gap-3">
-                  <div>{comment?.userName}</div>
-                  <div className="text-sm text-gray-400">{comment?.email}</div>
+                  <div className="text-base font-medium">
+                    {comment?.userName}
+                  </div>
+                  <div className="hidden text-sm text-gray-400 sm:block">
+                    {comment?.email}
+                  </div>
+                </div>
+              </address>
+              <div className="text-sm text-gray-600">
+                {comment?.content}
+
+                <div className="flex items-center justify-between pt-3">
                   <div className="text-sm text-gray-400">
                     {comment?.createdAt}
                   </div>
+
                   {comment?.uid === user?.uid && (
                     <div
                       className="text-sm text-gray-400 underline cursor-pointer pointerhover:hover:text-gray-800"
@@ -115,8 +126,7 @@ const PostComments = ({ post, getPost }: PostCommentsProps) => {
                     </div>
                   )}
                 </div>
-              </address>
-              <div className="text-sm text-gray-800">{comment?.content}</div>
+              </div>
             </li>
           ))}
       </ul>
