@@ -10,6 +10,7 @@ interface TextareaProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   isSubmitted: boolean;
+  onChange?: () => void;
 }
 
 const Textarea = ({
@@ -23,7 +24,7 @@ const Textarea = ({
 }: TextareaProps) => {
   return (
     <div className="relative w-full">
-      <Label htmlFor={id} errors={errors} label={label} />
+      <Label htmlFor={id} errors={errors} label={label} comment />
       <textarea
         id={id}
         {...register(id, { required })}
@@ -32,11 +33,12 @@ const Textarea = ({
           w-full
           p-2
           mt-2
-          min-h-[400px]
+          min-h-[100px]
           font-light
           border-2
         bg-white
           rounded-md
+          resize-none
           outline-none
           transition
           disabled:opacity-70

@@ -1,3 +1,4 @@
+import PostComments from '@/components/posts/PostComments';
 import { PostListProps } from '@/components/posts/PostList';
 import Loader from '@/components/ui/Loader';
 import AuthContext from '@/context/AuthContext';
@@ -57,29 +58,35 @@ const PostDetail = () => {
                 <div className="text-xs text-gray-400">{post?.email}</div>
               </div>
             </div>
-            {post?.category && <div>{post?.category}</div>}
           </div>
 
-          <div className="flex justify-between py-4 text-sm text-gray-400 border-b post__utill-box">
-            {post?.email === user?.email && (
-              <div className="flex gap-2">
-                <button className="pointerhover:hover:text-gray-800">
-                  <Link to={`/posts/${post?.id}/edit`}>修正</Link>
-                </button>
-                <button
-                  className="pointerhover:hover:text-gray-800"
-                  onClick={handleDelete}
-                >
-                  削除
-                </button>
-              </div>
-            )}
-
+          <div className="flex items-end justify-between py-4 text-sm text-gray-400 border-b post__utill-box">
+            <div className="flex flex-col-reverse items-center gap-3 ">
+              {post?.email === user?.email && (
+                <div className="flex gap-2">
+                  <button className="pointerhover:hover:text-gray-800">
+                    <Link to={`/posts/${post?.id}/edit`}>修正</Link>
+                  </button>
+                  <button
+                    className="pointerhover:hover:text-gray-800"
+                    onClick={handleDelete}
+                  >
+                    削除
+                  </button>
+                </div>
+              )}
+              {post?.category && (
+                <div className="px-3 py-1 text-gray-600 border border-gray-400 rounded-2xl">
+                  {post?.category}
+                </div>
+              )}
+            </div>
             <span className="text-gray-400 ">{post?.createdAt}</span>
           </div>
-          <div className="bg-gray-100 min-h-[700px] py-3 px-5 mt-5">
+          <div className="px-5 py-3 mt-5 bg-gray-100">
             <Viewer initialValue={post?.content} />
           </div>
+          <PostComments />
         </section>
       ) : (
         <Loader />
