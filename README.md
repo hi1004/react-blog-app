@@ -30,3 +30,5 @@
 - react-toastify
 - ract-slick
 - toastify-ui/editor
+- react-toggle-dark-mode
+- firestore
