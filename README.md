@@ -1,4 +1,7 @@
 # ICHIGOICHIE - React Blog 
+
+### 📌 概要
+
 ## [🔗 ICHIGOICHIE React Blog Link](https://ichigoichie-83333.web.app/)
 
 ## 1. プロジェクト紹介
@@ -11,7 +14,6 @@
 
 </center>
 
-### 📌 概要
 
 <br/>
 
