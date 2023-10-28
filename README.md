@@ -10,7 +10,7 @@
 
 <center>
 
-![light mode]("https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-1.png") ![dark mode]("https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-2.png")
+![light mode]("[https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-1.png](https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-1.png)") ![dark mode]("[https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-2.png](https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-2.png?raw=true)")
 
 </center>
 
