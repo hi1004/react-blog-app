@@ -1,14 +1,16 @@
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import ScrollToTop from '@/components/scroll/ScrollToTop';
-import { useEffect, useState } from 'react';
+import ThemeContext from '@/context/ThemeContext';
+import { useContext, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Theme, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [headerHeight, setHeaderHeight] = useState<number>(93);
   const [mainHeight, setMainHeight] = useState<string>('');
+  const themeContext = useContext(ThemeContext);
   const location = useLocation();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme={themeContext.theme as Theme}
       />
       <ScrollToTop />
       <Header getHeaderHeight={updateHeaderHeight} />
