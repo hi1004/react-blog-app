@@ -9,6 +9,9 @@ export default {
           raw: '(hover: hover) and (pointer: fine)',
         },
       },
+      transitionDuration: {
+        tr: '0.35s',
+      },
     },
   },
   plugins: [],

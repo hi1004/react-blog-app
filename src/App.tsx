@@ -18,7 +18,7 @@ function App() {
       location.pathname === '/posts' ||
       location.pathname === '/profile'
     ) {
-      setMainHeight(`calc(100vh - ${headerHeight + 158}px)`);
+      setMainHeight(`calc(100vh - ${headerHeight + 94}px)`);
     } else {
       setMainHeight('90vh');
     }
@@ -62,9 +62,9 @@ function App() {
           }}
           className={`${
             location.pathname === '/posts/new'
-              ? 'flex flex-col justify-center md:grid sm:place-items-center md:justify-normal'
+              ? 'flex flex-col  justify-center md:grid sm:place-items-center md:justify-normal'
               : 'sm:place-items-center  flex flex-col'
-          }`}
+          } transition duration-300 dark:text-slate-100 dark:bg-slate-900`}
         >
           <Outlet />
         </main>

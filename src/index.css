@@ -7,8 +7,13 @@ html {
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: normal;
 }
+
+html.dark body {
+  @apply bg-slate-900 duration-300 transition;
+}
 body {
   background-color: #fafafa;
+  transition-duration: 0.3s;
 }
 
 .slick-slider {
@@ -75,8 +80,20 @@ body {
 .toastui-editor-contents h6 {
   margin: 0px !important;
 }
+.toastui-editor-contents p,
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4,
+.toastui-editor-contents h5,
+.toastui-editor-contents h6 {
+  @apply dark:text-slate-100;
+}
 .toastui-editor-contents p {
   font-size: 16px;
+}
+html.dark .toastui-editor-contents p {
+  @apply text-slate-100;
 }
 @layer components {
   .header__line--after {

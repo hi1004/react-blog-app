@@ -86,7 +86,7 @@ const PostList = ({
         <>
           <div className="max-w-[680px] m-auto p-5">
             {hasListTitle && (
-              <h1 className="w-full pb-1 pl-2 m-auto mt-2 text-3xl font-bold border-l-8 sm:text-4xl border-l-sky-600">
+              <h1 className="w-full pb-1 pl-2 m-auto mt-2 text-3xl font-bold border-l-8 dark:text-slate-100 sm:text-4xl border-l-sky-600">
                 List of Blogs<span className="ml-4 text-sm">記事一覧</span>
               </h1>
             )}

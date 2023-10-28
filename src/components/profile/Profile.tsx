@@ -22,7 +22,7 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col w-full h-full gap-4 p-5 sm:max-w-[680px] m-auto">
-      <h1 className="max-w-[680px] pb-1 pl-2 mt-3 text-4xl font-bold border-l-8 border-l-sky-600">
+      <h1 className="max-w-[680px] pb-1 pl-2 mt-3 text-3xl sm:text-4xl font-bold border-l-8 border-l-sky-600">
         Profile<span className="ml-4 text-sm">プロフィール</span>
       </h1>
       <div className="flex items-end justify-between max-w-[680px] pt-5">
@@ -37,7 +37,7 @@ const Profile = () => {
         </div>
         <div
           role="presentation"
-          className="mr-3 text-sm text-gray-500 underline cursor-pointer"
+          className="mr-3 text-sm text-gray-500 underline cursor-pointer pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100"
           onClick={onSignOut}
         >
           ログアウト

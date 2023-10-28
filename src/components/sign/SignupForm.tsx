@@ -58,7 +58,7 @@ const SignupForm = () => {
           onSubmit={onSubmit}
           className="flex flex-col justify-center flex-1 max-w-full gap-6"
         >
-          <h1 className="pb-1 pl-2 text-4xl font-bold border-l-8 md:mb-5 border-l-sky-600">
+          <h1 className="pb-1 pl-2 text-4xl font-bold border-l-8 dark:text-slate-100 md:mb-5 border-l-sky-600">
             SIGNUP<span className="ml-4 text-sm">新規会員登録</span>
           </h1>
           <div className="flex flex-col gap-4">
@@ -121,8 +121,8 @@ const SignupForm = () => {
             disabled={isSubmitting || !hasNoErrors}
           />
         </form>
-        <div className="h-[1px] md:w-[1px] sm:h-full border"></div>
-        <div className="flex flex-col items-center justify-center flex-1 h-full gap-6 py-8 rounded-lg bg-neutral-100 md:py-0">
+        <div className="h-[1px] md:w-[1px] sm:h-full border dark:border-slate-400"></div>
+        <div className="flex flex-col items-center justify-center flex-1 h-full gap-6 px-4 py-8 rounded-lg dark:bg-slate-800 dark:text-slate-50 bg-neutral-100 md:py-0">
           <div className="text-center">
             <h2 className="mb-4 text-2xl">
               アカウントを既にお持ちの方はこちら

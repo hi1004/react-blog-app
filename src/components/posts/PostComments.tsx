@@ -108,17 +108,17 @@ const PostComments = ({ post, getPost }: PostCommentsProps) => {
                   </div>
                 </div>
               </address>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-slate-300">
                 {comment?.content}
 
                 <div className="flex items-center justify-between pt-3">
-                  <div className="text-sm text-gray-400">
+                  <div className="text-sm text-gray-400 dark:text-slate-500">
                     {comment?.createdAt}
                   </div>
 
                   {comment?.uid === user?.uid && (
                     <div
-                      className="text-sm text-gray-400 underline cursor-pointer pointerhover:hover:text-gray-800"
+                      className="text-sm text-gray-400 underline cursor-pointer pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100"
                       role="presentation"
                       onClick={() => handleDeleteComment(comment)}
                     >

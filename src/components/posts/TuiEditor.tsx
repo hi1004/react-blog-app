@@ -1,4 +1,5 @@
 import Label from '@/components/ui/Label';
+import ThemeContext from '@/context/ThemeContext';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -9,7 +10,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import 'tui-color-picker/dist/tui-color-picker.css';
 
@@ -21,6 +22,16 @@ interface TuiEditorProps {
 
 const TuiEditor = ({ content = '', editorRef, onChange }: TuiEditorProps) => {
   const [isActive, setIsActive] = useState(false);
+  const themeContext = useContext(ThemeContext);
+  const [editorKey, setEditorKey] = useState(1);
+  const [currentTheme, setCurrentTheme] = useState(themeContext.theme); // 현재 테마를 저장합니다.
+
+  // themeContext.theme이 변경될 때 실행되는 효과
+  useEffect(() => {
+    setCurrentTheme(themeContext.theme);
+    setEditorKey((prevKey) => prevKey + 1);
+  }, [themeContext.theme]);
+
   const {
     formState: { errors },
   } = useForm<FieldValues>({});
@@ -66,12 +77,13 @@ const TuiEditor = ({ content = '', editorRef, onChange }: TuiEditorProps) => {
           <div className="mb-2" />
           <Editor
             ref={editorRef}
+            key={editorKey}
             initialValue={content || ' '}
             initialEditType="markdown" // wysiwyg & markdown
             previewStyle={windowWidth >= 1080 ? 'vertical' : 'tab'}
             hideModeSwitch={true}
             height="400px"
-            theme={''} // '' & 'dark'
+            theme={currentTheme} // '' & 'dark'
             usageStatistics={false}
             toolbarItems={toolbarItems}
             useCommandShortcut={true}

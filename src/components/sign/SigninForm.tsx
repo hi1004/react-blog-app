@@ -43,7 +43,7 @@ const SigninForm = () => {
           onSubmit={onSubmit}
           className="flex flex-col justify-center flex-1 max-w-full gap-6"
         >
-          <h1 className="pb-1 pl-2 mb-5 text-4xl font-bold border-l-8 border-l-sky-600">
+          <h1 className="pb-1 pl-2 mb-5 text-4xl font-bold border-l-8 dark:text-slate-50 border-l-sky-600">
             LOGIN<span className="ml-4 text-sm">ログイン</span>
           </h1>
           <div className="flex flex-col gap-4">
@@ -79,13 +79,15 @@ const SigninForm = () => {
             disabled={isSubmitting || !hasNoErrors}
           />
         </form>
-        <div className="h-[1px] md:w-[1px] sm:h-full border"></div>
-        <div className="flex flex-col items-center justify-center flex-1 h-full gap-6 py-8 rounded-lg bg-neutral-100 md:py-0">
+        <div className="h-[1px] md:w-[1px] sm:h-full border dark:border-slate-400"></div>
+        <div className="flex flex-col items-center justify-center flex-1 h-full gap-6 px-4 py-8 rounded-lg dark:bg-slate-800 dark:text-slate-50 bg-neutral-100 md:py-0">
           <div className="text-center">
             <h2 className="mb-4 text-2xl">初めてご利用の方</h2>
             <p className="text-sm">
               ブログを書く・閲覧には
-              <span className="text-green-800">会員登録</span>
+              <span className="text-green-800 dark:text-blue-300">
+                会員登録
+              </span>
               が必要です
             </p>
           </div>

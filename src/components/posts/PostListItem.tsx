@@ -25,7 +25,7 @@ const PostListItem = ({ post, getPosts, setLoading }: PostListItem) => {
   };
 
   return (
-    <li className="py-6 pl-4 leading-6 border-t odd:border-t-gray-200 even:bg-slate-100 rounded-xl">
+    <li className="px-4 py-6 mt-2 leading-6 border-t odd:border-b odd:border-t-gray-200 odd:border-b-gray-200 dark:border-b-slate-600 dark:border-t-slate-600 dark:even:bg-slate-800 even:bg-slate-100 rounded-xl">
       <div
         className={`flex justify-between items-center gap-2 text-sm post__profile-box`}
         role="presentation"
@@ -36,7 +36,9 @@ const PostListItem = ({ post, getPosts, setLoading }: PostListItem) => {
           </div>
 
           <address className="flex flex-col not-italic">
-            <div className="text-gray-700 post__author">{post?.userName}</div>
+            <div className="text-gray-700 post__author dark:text-white">
+              {post?.userName}
+            </div>
             <div className="text-xs text-gray-400 post__author">
               {post?.email}
             </div>
@@ -44,25 +46,25 @@ const PostListItem = ({ post, getPosts, setLoading }: PostListItem) => {
         </div>
       </div>
       <Link to={`/posts/${post?.id}`}>
-        <div className="pl-0 sm:pl-10 pointerhover:hover:underline">
+        <div className="pl-0 pointerhover:hover:underline">
           <div className="my-3 text-xl font-bold">{post?.title}</div>
-          <p className="text-gray-500">{post?.summary}</p>
+          <p className="text-gray-500 dark:text-gray-400">{post?.summary}</p>
         </div>
       </Link>
       <div className="flex justify-end gap-2 mt-4">
-        <span className="block pl-10 mr-3 text-sm text-right text-gray-400">
+        <span className="block pl-10 mr-3 text-sm text-right text-gray-400 dark:text-slate-500">
           {post?.createdAt}
         </span>
         {post?.email === user?.email && (
           <div className="flex flex-row-reverse gap-2 mr-3 text-sm text-gray-400 post__utill-box">
             <button
-              className="pointerhover:hover:text-gray-800"
+              className="pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100"
               role="presentation"
               onClick={() => handleDelete(post?.id as string)}
             >
               削除
             </button>
-            <button className="pointerhover:hover:text-gray-800">
+            <button className="pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100">
               <Link to={`/posts/${post?.id}/edit`}>修正</Link>
             </button>
           </div>
