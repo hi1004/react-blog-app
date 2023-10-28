@@ -10,8 +10,8 @@
 
 <center>
 
-![light mode]("https://github.com/hi1004/react-blog-app/blob/main/public/images/screenshot-1.png?raw=true") ![dark mode]("https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-2.png")
 
+<img src="https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-1.png" alt="light mode" /> <img src="https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-2.png" alt="dark mode" />
 </center>
 
 <br/>
