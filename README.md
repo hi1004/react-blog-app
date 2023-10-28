@@ -6,7 +6,7 @@
 
 <center>
 
-![Alt text](image.png) <img width="192" alt="image" src="https://github.com/hi1004/react-blog-app/assets/80688093/598307dc-7adb-497c-b917-51574ba50d62">
+![Alt text](image.png)![Alt text](image-2.png)
 
 </center>
 
