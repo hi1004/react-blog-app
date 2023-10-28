@@ -1,27 +1,32 @@
-# React + TypeScript + Vite
+# ICHIGOICHIE - React Blog 
+## [🔗 ICHIGOICHIE React Blog Link](https://ichigoichie-83333.web.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. プロジェクト紹介
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<center>
 
-## Expanding the ESLint configuration
+![Alt text](image.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+</center>
 
-- Configure the top-level `parserOptions` property like this:
+### 📌 概要
+> 勉強会のメンバーに勉強・学習した情報を書き込む技術ブログを活用する目的で作りました。
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<br/>
+
+## 2. 開発環境
+
+### 2.1 技術
+
+| フロントエンド | バックエンド | バージョン、イシュー管理 |           
+| --- | --- | --- |
+| <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"><br> <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=Tailwind CSS&logoColor=white"><br/><img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">| <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white">| <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"><br/><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> |
+
+### 2.2 パッケージモジュール
+
+<img src="https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=Yarn&logoColor=white"> <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white"><br/><img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white"> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">  <img src="https://img.shields.io/badge/React Router Dom-CA4245?style=for-the-badge&logo=React Router&logoColor=white"><br/><img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=white"> <img src="https://img.shields.io/badge/react_hook_form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"> 
+- react-toastify
+- ract-slick
+- toastify-ui/editor
