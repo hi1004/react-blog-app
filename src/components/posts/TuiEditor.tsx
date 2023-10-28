@@ -24,9 +24,8 @@ const TuiEditor = ({ content = '', editorRef, onChange }: TuiEditorProps) => {
   const [isActive, setIsActive] = useState(false);
   const themeContext = useContext(ThemeContext);
   const [editorKey, setEditorKey] = useState(1);
-  const [currentTheme, setCurrentTheme] = useState(themeContext.theme); // 현재 테마를 저장합니다.
+  const [currentTheme, setCurrentTheme] = useState(themeContext.theme);
 
-  // themeContext.theme이 변경될 때 실행되는 효과
   useEffect(() => {
     setCurrentTheme(themeContext.theme);
     setEditorKey((prevKey) => prevKey + 1);
