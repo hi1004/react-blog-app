@@ -30,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled:cursor-not-allowed
         rounded-lg
         pointerhover:hover:opacity-80
+        dark:pointerhover:hover:opacity-90
         ${comment ? 'w-[120px] absolute right-0' : 'w-full relative'}
         ${outline ? 'bg-white' : 'bg-sky-600'}
         ${outline ? 'border-sky-600' : 'border-sky-600'}

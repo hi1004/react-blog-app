@@ -7,8 +7,8 @@ const Footer = () => {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <footer className="flex  bg-gray-200 min-h-[40px] px-8 py-12 flex-col items-center gap-3">
-      <nav className="flex">
+    <footer className="flex transition duration-300 dark:bg-slate-700  bg-gray-200 min-h-[40px] px-8  py-4 flex-col items-center gap-3">
+      <nav className="flex dark:text-slate-50">
         <Link
           to={GITHUB_URL}
           target="_blank"
@@ -19,7 +19,7 @@ const Footer = () => {
         </Link>
       </nav>
 
-      <p className="text-sm font-normal text-gray-500">
+      <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
         ©Copyright {currentYear}. hi1004. All Rights Reserved.
       </p>
     </footer>

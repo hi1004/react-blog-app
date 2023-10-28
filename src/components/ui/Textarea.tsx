@@ -41,6 +41,7 @@ const Textarea = ({
           resize-none
           outline-none
           transition
+          dark:bg-slate-900
           disabled:opacity-70
           disabled:cursor-not-allowed
       ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}

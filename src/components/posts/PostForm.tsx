@@ -116,7 +116,7 @@ const PostForm = () => {
 
   return (
     <section className="flex flex-col justify-center w-full h-full gap-4 p-5 sm:max-w-[1080px]">
-      <h1 className="pb-1 pl-2 mb-1 text-4xl font-bold border-l-8 border-l-sky-600">
+      <h1 className="pb-1 pl-2 mb-1 text-3xl font-bold border-l-8 sm:text-4xl border-l-sky-600">
         Write a Blog<span className="ml-4 text-sm">ブログを書く</span>
       </h1>
       <form

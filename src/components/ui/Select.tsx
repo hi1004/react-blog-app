@@ -47,6 +47,7 @@ const Select = ({
           p-2
           font-light
           border-2
+          dark:text-gray-800
           bg-white
           rounded-md
           outline-none

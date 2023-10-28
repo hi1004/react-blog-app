@@ -62,11 +62,11 @@ const PostDetail = () => {
             <div className="flex flex-col-reverse items-center gap-3 ">
               {post?.email === user?.email && (
                 <div className="flex gap-2">
-                  <button className="pointerhover:hover:text-gray-800">
+                  <button className="pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100">
                     <Link to={`/posts/${post?.id}/edit`}>修正</Link>
                   </button>
                   <button
-                    className="pointerhover:hover:text-gray-800"
+                    className="pointerhover:hover:text-gray-800 dark:pointerhover:hover:text-slate-100"
                     onClick={handleDelete}
                   >
                     削除
@@ -74,14 +74,16 @@ const PostDetail = () => {
                 </div>
               )}
               {post?.category && (
-                <div className="px-3 py-1 text-gray-600 border border-gray-400 rounded-2xl">
+                <div className="px-3 py-1 text-gray-600 border border-gray-400 dark:text-slate-100 rounded-2xl">
                   {post?.category}
                 </div>
               )}
             </div>
-            <span className="text-gray-400 ">{post?.createdAt}</span>
+            <span className="text-gray-400 dark:text-slate-500">
+              {post?.createdAt}
+            </span>
           </div>
-          <div className="px-5 my-5 bg-gray-100 py-9">
+          <div className="px-5 my-5 bg-gray-100 dark:bg-slate-800 py-9">
             <Viewer initialValue={post?.content} />
           </div>
           <PostComments post={post} getPost={getPost} />
