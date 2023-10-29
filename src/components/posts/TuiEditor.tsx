@@ -8,10 +8,12 @@ import '@toast-ui/editor/dist/i18n/ja-jp';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import 'tui-color-picker/dist/tui-color-picker.css';
 
 interface TuiEditorProps {
@@ -51,6 +53,25 @@ const TuiEditor = ({ content = '', editorRef, onChange }: TuiEditorProps) => {
     setIsActive(true);
   };
 
+  const onUploadImage = async (
+    file: File,
+    callback: (url: string, name: string) => void
+  ) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, 'your_storage_path/' + file.name);
+
+    try {
+      await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+
+      callback(downloadURL, file.name);
+      toast.success('イメージをアップロードしました');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.code);
+    }
+  };
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const editorWrapperRef = useRef(null);
   useEffect(() => {
@@ -90,6 +111,9 @@ const TuiEditor = ({ content = '', editorRef, onChange }: TuiEditorProps) => {
             onBlur={handleEditorBlur}
             onFocus={handleEditorFocus}
             onChange={onChange}
+            hooks={{
+              addImageBlobHook: onUploadImage,
+            }}
             plugins={[
               colorSyntax,
               [codeSyntaxHighlight, { highlighter: Prism }],

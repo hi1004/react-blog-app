@@ -10,7 +10,7 @@
 
 <center>
 
-![Alt text]("/public/images/screenshot-1.png")![Alt text]("/public/images/screenshot-2.png")
+![Alt text]("/public/images/screenshot-1.png") ![Alt text]("/public/images/screenshot-2.png")
 
 </center>
 
