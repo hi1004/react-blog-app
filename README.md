@@ -10,7 +10,7 @@
 
 <center>
 
-![Alt text]("/public/images/screenshot-1.png") ![Alt text]("/public/images/screenshot-2.png")
+<img src="https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-1.png" alt="light mode" /> <img src="https://raw.githubusercontent.com/hi1004/react-blog-app/main/public/images/screenshot-2.png" alt="dark mode" />
 
 </center>
 
