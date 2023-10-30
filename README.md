@@ -3,6 +3,8 @@
 ### 📌 概要
 
 ## [🔗 ICHIGOICHIE React Blog Link](https://ichigoichie-83333.web.app/)
+- email: test@test.com
+- password: 12345678
 
 ## 1. プロジェクト紹介
 
@@ -47,6 +49,7 @@
 ### 3.2 CRUD
 
 - `NoSQL DataBase`であるfirebaseの `firestore`で データを管理します。
+- コメント機能を追加しました。
 - C(create): ブログを書くページのフォームでは、`React Hook Form`と`Toast UI Editor`で実装しました。
 - R(read): ブログを読み込むブログリストページでは、`FormList` componentで再利用性を高め、プロフィールやホームページなどにも見えるようにしています。
 - U(update): ブログを修正する機能は自分の投稿のみ修正できるようにしました。別のアカウントでログインしたら、修正ができません。
