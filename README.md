@@ -3,8 +3,10 @@
 ### 📌 概要
 
 ## [🔗 ICHIGOICHIE React Blog Link](https://ichigoichie-83333.web.app/)
-- email: test@test.com
-- password: 12345678
+
+>会員登録しない方はテスト用アカウント使ってください。
+> - email: test@test.com
+> - password: 12345678
 
 ## 1. プロジェクト紹介
 
